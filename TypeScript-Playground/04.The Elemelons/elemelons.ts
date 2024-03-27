@@ -72,3 +72,29 @@ class Airmelon extends Melon {
     }
 }
 
+class Melolemonmelon extends Melon {
+    public elementTypes: Array<string>;
+    public currentElement: string;
+
+    constructor(weight: number, melonSort: string) {
+        super(weight, melonSort);
+        this.elementTypes = ["Water", "Fire", "Earth", "Air"];
+    }
+
+    get elementIndex(): number {
+        return this.weight * this.melonSort.length;
+    }
+
+    morph(): void {
+        const element = this.elementTypes.shift();
+        this.currentElement = element!;
+        this.elementTypes.push(element!);
+    }
+
+    toString(): void {
+        console.log("Element: " + this.currentElement);
+        console.log(`Sort: ${this.melonSort}`);
+        console.log(`Element Index: ${this.elementIndex}`);
+    }
+}
+
