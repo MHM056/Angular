@@ -1,7 +1,7 @@
 class Box<T> {
     private _boxes = [];
 
-    public add(element: T) {
+    public add(element: T): void {
         this._boxes.push(element);
     }
 
