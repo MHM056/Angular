@@ -37,4 +37,11 @@ export class ArticleComponent {
     this.imageIsShown = !this.imageIsShown;
     this.imageButtonTitle = this.imageButtonTitle === 'Show Image' ? 'Read Image' : 'Show Image';
   }
+
+  hideDesc(): void {
+    this.descToShow = '';
+    this.articleDescLen = 0;
+    this.showReadMoreBtn = true;
+    this.showHideBtn = false;
+  }
 }
