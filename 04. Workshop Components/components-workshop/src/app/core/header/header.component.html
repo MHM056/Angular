@@ -3,7 +3,7 @@
         <div class="logo-wrap">
             <p class="logo"><span class="logo">SoftUni Forum</span></p>
         </div>
-        <div class="mini-navbar">
+        <div *ngIf="!isLoggedIn" class="mini-navbar">
             <ul>
                 <li>
                     <a href="#">Login</a>
