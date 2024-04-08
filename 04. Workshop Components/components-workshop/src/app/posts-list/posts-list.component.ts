@@ -9,9 +9,13 @@ import { Post } from '../types/post';
 })
 export class PostsListComponent implements OnInit {
   posts: Post[] = [];
-  constructor(private api: ApiService) {}
+  isLoading: boolean = true;
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.api.getPosts(5).subscribe(posts => this.posts = posts);
+    this.api.getPosts(5).subscribe(posts => {
+      this.posts = posts;
+      this.isLoading = false;
+    });
   }
 }
