@@ -13,9 +13,13 @@ export class ThemesListComponent implements OnInit {
   
   themes: Theme[] = [];
   isLoading: boolean = true;
-  
+
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
+  }
+
+  get userId(): string {
+    return this.userService.user?.id || '';
   }
 
   ngOnInit(): void {
@@ -29,5 +33,11 @@ export class ThemesListComponent implements OnInit {
         this.isLoading = true;
       }
     });
+  }
+
+  isSubscribed(theme: Theme) {
+    const isSubscribedUser =theme.subscribers.find((s) => s === this.userId);
+    return isSubscribedUser;
+
   }
 }
