@@ -17,11 +17,17 @@ export class ApiService {
     return this.http.get<Theme[]>(`${apiUrl}/themes`);
   }
 
-  getPosts(limit?: number) { 
+  createTheme(themeName: string, postText: string) {
+    const { apiUrl } = environment;
+    const payload = { themeName, postText }
+    return this.http.post<Theme>(`${apiUrl}/themes`, payload);
+  }
+
+  getPosts(limit?: number) {
     const { apiUrl } = environment;
     let url = `${apiUrl}/posts`;
 
-    if(limit) {
+    if (limit) {
       url += `?limit=${limit}`;
     }
 
