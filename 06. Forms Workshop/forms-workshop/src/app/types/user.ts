@@ -2,7 +2,7 @@ import { Post } from "./post";
 
 export interface User {
     themes: string[];
-    posts: Post[];
+    posts: string[] | Post[];
     _id: string;
     tel: string;
     email: string;
