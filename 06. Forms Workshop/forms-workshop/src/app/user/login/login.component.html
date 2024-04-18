@@ -6,7 +6,16 @@
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input class="input-error" type="email" name="email" id="email" placeholder="john.doe@gmail.com" ngModel #inputEmail="ngModel" required>
+                <input 
+                class="input-error" 
+                type="email" 
+                name="email" 
+                id="email" 
+                placeholder="john.doe@gmail.com" 
+                ngModel 
+                #inputEmail="ngModel" 
+                required
+                [appEmail]="['hello', 'directive']">
             </p>
             <ng-container *ngIf="inputEmail.touched">
                 <p class="error" *ngIf="inputEmail.errors?.['required']">
