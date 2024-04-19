@@ -15,15 +15,15 @@
                 ngModel 
                 #inputEmail="ngModel" 
                 required
-                [appEmail]="['hello', 'directive']">
+                [appEmail]="['bg','com']">
             </p>
             <ng-container *ngIf="inputEmail.touched">
                 <p class="error" *ngIf="inputEmail.errors?.['required']">
                     Email is required!
                 </p>
-                <!-- <p class="error">
+                <p class="error" *ngIf="inputEmail.errors?.['emailValidator']">
                     Email is not valid!
-                </p> -->
+                </p>
             </ng-container>
 
             <p class="field field-icon">
