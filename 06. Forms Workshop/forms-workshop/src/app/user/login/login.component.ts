@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { EMAIL_DOMAINS } from 'src/app/constants';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent {
   constructor(private userService: UserService, private route: Router) {}
+
+  domains: string[] = EMAIL_DOMAINS;
 
   login(form: NgForm) {
     // ev.preventDefault();'
