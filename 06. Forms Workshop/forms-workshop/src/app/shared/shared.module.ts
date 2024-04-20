@@ -10,7 +10,7 @@ import { EmailDirective } from './validators/email.directive';
   declarations: [
     LoaderComponent,
     WelcomeComponent,
-    EmailDirective
+    EmailDirective,
   ],
   imports: [
     CommonModule
