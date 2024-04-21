@@ -1,18 +1,50 @@
 <div class="container">
-    <div class="profile"><img src="./profile.png" alt="default user">
-        <h3>User Info:</h3>
-        <div class="flex">
-            <p>Username: </p>
-            <p>Johny</p>
+    <ng-container *ngIf="!showEditMode">
+        <div class="profile"><img src="../../../assets/images/profile.png" alt="default user">
+            <h3>User Info:</h3>
+            <div class="flex">
+                <p>Username: </p>
+                <p>{{username}}</p>
+            </div>
+            <div class="flex">
+                <p>Email: </p>
+                <p>{{email}}</p>
+            </div>
+            <div class="flex">
+                <p>Phone: </p>
+                <p>+359 {{phoneNumber}}</p>
+            </div>
+            <button class="edit-button" (click)="onEdit()">Edit</button>
         </div>
-        <div class="flex">
-            <p>Email: </p>
-            <p>john.doe@gmail.com</p>
+    </ng-container>
+
+    <ng-container *ngIf="showEditMode">
+        <div class="container">
+            <div class="profile">
+                <img src="../../../assets/images/profile.png" alt="default user">
+                <h3>User Info:</h3>
+                <form action="">
+                    <div class="flex">
+                        <p>Username: </p>
+                        <input type="text" name="username" id="username" value="Johny">
+                    </div>
+                    <div class="flex">
+                        <p>Email: </p>
+                        <input type="email" name="email" id="email" value="john.doe@gmail.com">
+                    </div>
+                    <div class="flex">
+                        <p>Phone: </p>
+                        <div>
+                            <select name="select-tel" id="select-tel" class="tel">
+                                <option value="00359">+359</option>
+                            </select>
+                            <input type="text" name="tel" id="tel" value="885 888 888">
+                        </div>
+                    </div>
+                    <button class="red-button" (click)="onCancel()">Cancel</button>
+                    <button class="green-button">Save</button>
+                </form>
+            </div>
         </div>
-        <div class="flex">
-            <p>Phone: </p>
-            <p>+359 885 888 888</p>
-        </div>
-        <button class="edit-button">Edit</button>
-    </div>
+    </ng-container>
 </div>
