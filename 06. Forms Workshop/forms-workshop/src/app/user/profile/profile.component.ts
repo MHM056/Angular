@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { EMAIL_DOMAINS } from 'src/app/constants';
+import { emailValidator } from 'src/app/shared/utils/email-validator';
 import { ProfileDetails } from 'src/app/types/user';
 
 @Component({
@@ -8,12 +11,21 @@ import { ProfileDetails } from 'src/app/types/user';
 })
 export class ProfileComponent implements OnInit {
 
+  constructor(private fb: FormBuilder) {}
+
   showEditMode: boolean = false;
+
   profileDetails: ProfileDetails = {
     username: '',
     email: '',
     phoneNumber: ''
   };
+
+  form = this.fb.group({
+    username: ['', [Validators.required, Validators.minLength(5)]],
+    email: ['', [Validators.required, emailValidator(EMAIL_DOMAINS)]],
+    phoneNumber: ['', []],
+  })
 
   ngOnInit(): void {
     const getUserDetails: any = localStorage.getItem('[user]');
@@ -23,11 +35,19 @@ export class ProfileComponent implements OnInit {
     this.profileDetails.phoneNumber = userDetails.phoneNumber;
   }
 
-  onEdit(): void {
-    this.showEditMode = true;
+  onToggle(): void {
+    this.showEditMode = !this.showEditMode;
   }
 
   onCancel(): void {
     this.showEditMode = false;
+  }
+
+  saveProfile(): void {
+    if(this.form.invalid){
+      return;
+    }
+    this.profileDetails = this.form.value as ProfileDetails;
+    this.onToggle();
   }
 }
