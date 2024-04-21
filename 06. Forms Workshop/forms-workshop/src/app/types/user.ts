@@ -20,3 +20,9 @@ export interface UserForAuth {
     phoneNumber: string;
     password: string;
 }
+
+export interface ProfileDetails {
+    username: string;
+    email: string;
+    phoneNumber: string;
+}

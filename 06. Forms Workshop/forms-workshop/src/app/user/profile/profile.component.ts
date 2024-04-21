@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileDetails } from 'src/app/types/user';
 
 @Component({
   selector: 'app-profile',
@@ -8,24 +9,25 @@ import { Component, OnInit } from '@angular/core';
 export class ProfileComponent implements OnInit {
 
   showEditMode: boolean = false;
-
-  username: string = '';
-  email: string = '';
-  phoneNumber: string = '';
+  profileDetails: ProfileDetails = {
+    username: '',
+    email: '',
+    phoneNumber: ''
+  };
 
   ngOnInit(): void {
     const getUserDetails: any = localStorage.getItem('[user]');
     const userDetails = JSON.parse(getUserDetails);
-    this.username = userDetails.firstName;
-    this.email = userDetails.email;
-    this.phoneNumber = userDetails.phoneNumber;
+    this.profileDetails.username = userDetails.firstName;
+    this.profileDetails.email = userDetails.email;
+    this.profileDetails.phoneNumber = userDetails.phoneNumber;
   }
 
-  onEdit() {
+  onEdit(): void {
     this.showEditMode = true;
   }
 
-  onCancel() {
+  onCancel(): void {
     this.showEditMode = false;
   }
 }

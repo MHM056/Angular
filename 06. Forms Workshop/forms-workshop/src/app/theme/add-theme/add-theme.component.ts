@@ -14,8 +14,7 @@ export class AddThemeComponent {
     if(form.invalid) {
       return;
     }
-
-    console.log(form.value);
     
+    console.log(form.value);
   }
 }
