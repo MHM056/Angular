@@ -45,7 +45,9 @@
                         </div>
                     </div>
                     <button class="red-button" (click)="onCancel()">Cancel</button>
-                    <button class="green-button" >Save</button>
+                    <button class="green-button"
+                    [disabled]="form.invalid"
+                    [style]="{backgroundColor: form.invalid ? 'grey' : 'green'}" >Save</button>
                 </form>
             </div>
         </div>
