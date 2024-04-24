@@ -39,7 +39,10 @@
             </div>
             <div class="new-theme-buttons">
                 <button class="cancel">Cancel</button>
-                <button class="public" (click)="addTheme(form)">Post</button>
+                <button class="public" 
+                (click)="addTheme(form)" 
+                [disabled]="form.invalid" 
+                [style]="{backgroundColor: form.invalid ? 'grey' : 'white'}">Post</button>
             </div>
 
         </form>

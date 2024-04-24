@@ -32,7 +32,7 @@
                 </p>
             </ng-template>
 
-            <button>Login</button>
+            <button [disabled]="form.invalid" [style]="{backgroundColor: form.invalid ? 'grey' : 'white'}">Login</button>
 
             <p class="text-center">
                 Have an account?
