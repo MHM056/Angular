@@ -23,7 +23,17 @@ export class UserService {
    }
 
   login(email: string, password: string) {
-    return this.http.post('/api/login', { email, password });
+    return this.http.post<UserForAuth>('/api/login', { email, password });
+  }
+
+  register(username: string, tel: string, email: string, password: string, rePassword: string) {
+    return this.http.post<UserForAuth>('/api/register', {
+      username,
+      tel,
+      email,
+      password,
+      rePassword
+    });
   }
 
   logout() {

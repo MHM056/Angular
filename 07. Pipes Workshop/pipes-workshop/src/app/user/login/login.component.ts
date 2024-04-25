@@ -10,12 +10,12 @@ import { EMAIL_DOMAINS } from 'src/app/constants';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private userService: UserService, private route: Router) {}
+  constructor(private userService: UserService, private route: Router) { }
 
   domains: string[] = EMAIL_DOMAINS;
 
   login(form: NgForm) {
-    if(form.invalid) {
+    if (form.invalid) {
       return;
     }
 
