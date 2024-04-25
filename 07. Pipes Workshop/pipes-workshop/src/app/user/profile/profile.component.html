@@ -27,13 +27,23 @@
                     <div class="flex">
                         <p>Username: </p>
                         <input type="text" name="username" id="username" [value]="profileDetails.username"
-                        formControlName="username">
+                            formControlName="username">
                     </div>
+                    <ng-container *ngIf="form.get('username')?.touched">
+                        <p class="error" *ngIf="form.get('username')?.errors?.['required']">Username is required!</p>
+                        <p class="error" *ngIf="form.get('username')?.errors?.['minlength']">Username must be at least 5 characters!
+                        </p>
+                    </ng-container>
                     <div class="flex">
                         <p>Email: </p>
                         <input type="email" name="email" id="email" value="{{profileDetails.email}}"
-                        formControlName="email">
+                            formControlName="email">
                     </div>
+                    <ng-container *ngIf="form.get('email')?.touched">
+                        <p class="error" *ngIf="form.get('email')?.errors?.['required']">Email is required!</p>
+                        <p class="error" *ngIf="form.get('email')?.errors?.['emailValidator']">Email is not valid!
+                        </p>
+                    </ng-container>
                     <div class="flex">
                         <p>Phone: </p>
                         <div>
@@ -41,13 +51,12 @@
                                 <option value="00359">+359</option>
                             </select>
                             <input type="text" name="tel" id="tel" value="{{profileDetails.phoneNumber}}"
-                            formControlName="phoneNumber">
+                                formControlName="phoneNumber">
                         </div>
                     </div>
                     <button class="red-button" (click)="onCancel()">Cancel</button>
-                    <button class="green-button"
-                    [disabled]="form.invalid"
-                    [style]="{backgroundColor: form.invalid ? 'grey' : 'green'}" >Save</button>
+                    <button class="green-button" [disabled]="form.invalid"
+                        [style]="{backgroundColor: form.invalid ? 'grey' : 'green'}">Save</button>
                 </form>
             </div>
         </div>
