@@ -15,15 +15,15 @@ export class LoginComponent {
   domains: string[] = EMAIL_DOMAINS;
 
   login(form: NgForm) {
-    // ev.preventDefault();'
     if(form.invalid) {
       return;
     }
 
     const { email, password } = form.value;
 
-    this.userService.login();
-    this.route.navigate(['/themes']);
+    this.userService.login(email, password).subscribe(() => {
+      this.route.navigate(['/themes']);
+    })
   }
 }
 
