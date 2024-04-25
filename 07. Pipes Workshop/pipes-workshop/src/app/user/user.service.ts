@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private user$$ = new BehaviorSubject<UserForAuth | undefined>(undefined);
+  private user$ = this.user$$.asObservable();
+  
   user: UserForAuth | undefined;
   USER_KEY = '[user]';
 
@@ -13,14 +17,7 @@ export class UserService {
     return !!this.user;
   }
 
-  constructor(private http: HttpClient) {
-    try {
-      const lsUser = localStorage.getItem(this.USER_KEY) || '';
-      this.user = JSON.parse(lsUser);
-    } catch (error) {
-      this.user = undefined;
-    }
-   }
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string) {
     return this.http.post<UserForAuth>('/api/login', { email, password });
@@ -37,9 +34,7 @@ export class UserService {
   }
 
   logout() {
-    this.user = undefined;
-    localStorage.removeItem(this.USER_KEY);
-    
+    return this.http.post('/api/logout', {});
   }
 
 }
