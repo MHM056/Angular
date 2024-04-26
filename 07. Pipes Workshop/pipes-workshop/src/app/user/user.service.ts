@@ -21,29 +21,29 @@ export class UserService {
     this.user$.subscribe(user => {
       this.user = user;
     })
-   }
+  }
 
   login(email: string, password: string) {
     return this.http
       .post<UserForAuth>('/api/login', { email, password })
-      .pipe(tap((user: any) => this.user$$.next(user)));
+      .pipe(tap((user) => this.user$$.next(user)));
   }
 
-  register(username: string, tel: string, email: string, password: string, rePassword: string) {
-    return this.http.post<UserForAuth>('/api/register', {
-      username,
-      tel,
-      email,
-      password,
-      rePassword
-    })
-      .pipe(tap((user: any) => this.user$$.next(user)));
+  register(username: string, email: string, tel: string, password: string, rePassword: string) {
+    return this.http
+      .post<UserForAuth>('/api/register', {
+        tel,
+        email,
+        username,
+        password,
+        rePassword
+      })
+      .pipe(tap((user) => this.user$$.next(user)));
   }
 
   logout() {
     return this.http
       .post('/api/logout', {})
-      .pipe(tap((user: any) => this.user$$.next(undefined)));
+      .pipe(tap((user) => this.user$$.next(undefined)));
   }
-
 }
