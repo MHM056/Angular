@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserForAuth } from '../types/user';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
   private user$$ = new BehaviorSubject<UserForAuth | undefined>(undefined);
   private user$ = this.user$$.asObservable();
-  
+
   user: UserForAuth | undefined;
   USER_KEY = '[user]';
 
@@ -17,10 +17,16 @@ export class UserService {
     return !!this.user;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.user$.subscribe(user => {
+      this.user = user;
+    })
+   }
 
   login(email: string, password: string) {
-    return this.http.post<UserForAuth>('/api/login', { email, password });
+    return this.http
+      .post<UserForAuth>('/api/login', { email, password })
+      .pipe(tap((user: any) => this.user$$.next(user)));
   }
 
   register(username: string, tel: string, email: string, password: string, rePassword: string) {
@@ -30,11 +36,14 @@ export class UserService {
       email,
       password,
       rePassword
-    });
+    })
+      .pipe(tap((user: any) => this.user$$.next(user)));
   }
 
   logout() {
-    return this.http.post('/api/logout', {});
+    return this.http
+      .post('/api/logout', {})
+      .pipe(tap((user: any) => this.user$$.next(undefined)));
   }
 
 }
