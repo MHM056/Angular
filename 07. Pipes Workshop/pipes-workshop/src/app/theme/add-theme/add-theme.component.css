@@ -43,7 +43,7 @@
 .new-theme-content textarea {
     width: 100%;
     padding: 0.5em;
-    margin: 0;
+    margin: 0; 
 }
 
 .new-theme-content label {

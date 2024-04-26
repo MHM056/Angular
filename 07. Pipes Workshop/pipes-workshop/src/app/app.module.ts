@@ -12,12 +12,14 @@ import { ThemeModule } from './theme/theme.module';
 import { ErrorComponent } from './error/error.component';
 import { FormsModule } from '@angular/forms';
 import { appInterceptorProvider } from './app.interceptor';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ErrorComponent,
+    AuthenticateComponent,
   ],
   imports: [
     BrowserModule,
