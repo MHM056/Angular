@@ -33,7 +33,7 @@ export class RegisterComponent {
       return;
     }
     const { username, email, tel, passGroup: { password, rePass } = {} } = this.form.value;
-
+    
     this.userService.register(username!, email!, tel!, password!, rePass!).subscribe(() => {
       this.router.navigate(['/themes']);
     })
