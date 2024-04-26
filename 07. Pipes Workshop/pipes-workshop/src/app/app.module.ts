@@ -24,7 +24,6 @@ import { appInterceptorProvider } from './app.interceptor';
     CoreModule,
     SharedModule,
     HttpClientModule,
-    UserModule,
     ThemeModule,
     AppRoutingModule,
     FormsModule
