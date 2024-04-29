@@ -9,27 +9,25 @@ import { Post } from './types/post';
 })
 export class ApiService {
 
+  apiUrl = environment.apiUrl;
+
   constructor(private http: HttpClient) { }
 
   getThemes() {
-    const { apiUrl } = environment;
-
-    return this.http.get<Theme[]>(`${apiUrl}/themes`);
+    return this.http.get<Theme[]>(`${this.apiUrl}/themes`);
   }
 
   getTheme(id: string) {
-    const { apiUrl } = environment;
-    return this.http.get<Theme>(`${apiUrl}/themes/${id}`);
+    return this.http.get<Theme>(`${this.apiUrl}/themes/${id}`);
   }
+
   createTheme(themeName: string, postText: string) {
-    const { apiUrl } = environment;
     const payload = { themeName, postText }
-    return this.http.post<Theme>(`${apiUrl}/themes`, payload);
+    return this.http.post<Theme>(`${this.apiUrl}/themes`, payload);
   }
 
   getPosts(limit?: number) {
-    const { apiUrl } = environment;
-    let url = `${apiUrl}/posts`;
+    let url = `${this.apiUrl}/posts`;
 
     if (limit) {
       url += `?limit=${limit}`;
@@ -37,4 +35,9 @@ export class ApiService {
 
     return this.http.get<Post[]>(url);
   }
+
+  themeSubscribe(id: string) {
+    return this.http.put(`${this.apiUrl}/themes/${id}`, {});
+  }
+
 }

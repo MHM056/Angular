@@ -10,7 +10,7 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class ThemesListComponent implements OnInit {
   constructor(private api: ApiService, private userService: UserService) { }
-  
+
   themes: Theme[] = [];
   isLoading: boolean = true;
 
@@ -36,8 +36,12 @@ export class ThemesListComponent implements OnInit {
   }
 
   isSubscribed(theme: Theme) {
-    const isSubscribedUser =theme.subscribers.find((s) => s === this.userId);
+    const isSubscribedUser = theme.subscribers.find((s) => s === this.userId);
     return isSubscribedUser;
+  }
 
+  handleSubscribe(el: any): void {
+    const themeId = el.attributes.key.value;
+    this.api.themeSubscribe(themeId);
   }
 }
