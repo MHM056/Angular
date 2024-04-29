@@ -5,6 +5,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { EmailDirective } from './validators/email.directive';
 import { SlicePipe } from './pipes/slice.pipe';
 import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
+import { SliceTimePipe } from './pipes/slice-time.pipe';
 
 
 
@@ -15,10 +16,11 @@ import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
     EmailDirective,
     SlicePipe,
     ElapsedTimePipe,
+    SliceTimePipe,
   ],
   imports: [
     CommonModule
   ],
-  exports: [LoaderComponent, WelcomeComponent, EmailDirective, SlicePipe, ElapsedTimePipe ]
+  exports: [LoaderComponent, WelcomeComponent, EmailDirective, SlicePipe, ElapsedTimePipe, SliceTimePipe ]
 })
 export class SharedModule { }

@@ -11,7 +11,7 @@
                     </a>
                     <div class="columns">
                         <div>
-                            <p>Date: <time>{{ theme.created_at }}</time></p>
+                            <p>Date: <time>{{ theme.created_at | sliceTime }}</time></p>
                             <div class="nick-name">
                                 <p>Username: <span>{{ theme.userId.username }}</span></p>
                             </div>
