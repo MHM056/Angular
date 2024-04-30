@@ -17,12 +17,12 @@ export interface UserForAuth {
     id: string;
     username: string;
     email: string;
-    phoneNumber: string;
+    tel: string;
     password: string;
 }
 
 export interface ProfileDetails {
     username: string;
     email: string;
-    phoneNumber: string;
+    tel: string;
 }

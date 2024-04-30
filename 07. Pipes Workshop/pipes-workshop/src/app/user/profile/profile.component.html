@@ -12,7 +12,7 @@
             </div>
             <div class="flex">
                 <p>Phone: </p>
-                <p>+359 {{profileDetails.phoneNumber}}</p>
+                <p>+359 {{profileDetails.tel}}</p>
             </div>
             <button class="edit-button" (click)="onToggle()">Edit</button>
         </div>
@@ -50,8 +50,8 @@
                             <select name="select-tel" id="select-tel" class="tel">
                                 <option value="00359">+359</option>
                             </select>
-                            <input type="text" name="tel" id="tel" value="{{profileDetails.phoneNumber}}"
-                                formControlName="phoneNumber">
+                            <input type="text" name="tel" id="tel" value="{{profileDetails.tel}}"
+                                formControlName="tel">
                         </div>
                     </div>
                     <button class="red-button" (click)="onCancel()">Cancel</button>

@@ -3,6 +3,7 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { EMAIL_DOMAINS } from 'src/app/constants';
 import { emailValidator } from 'src/app/shared/utils/email-validator';
 import { ProfileDetails } from 'src/app/types/user';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,28 +12,37 @@ import { ProfileDetails } from 'src/app/types/user';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   showEditMode: boolean = false;
 
   profileDetails: ProfileDetails = {
     username: '',
     email: '',
-    phoneNumber: ''
+    tel: ''
   };
 
   form = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(5)]],
     email: ['', [Validators.required, emailValidator(EMAIL_DOMAINS)]],
-    phoneNumber: ['', []],
+    tel: ['', []],
   })
 
   ngOnInit(): void {
-    const getUserDetails: any = localStorage.getItem('[user]');
-    const userDetails = JSON.parse(getUserDetails);
-    this.profileDetails.username = userDetails.firstName;
-    this.profileDetails.email = userDetails.email;
-    this.profileDetails.phoneNumber = userDetails.phoneNumber;
+    const { username, email, tel } = this.userService.user!;
+    console.log(username, email, tel);
+    
+    this.profileDetails = {
+      username,
+      email,
+      tel
+    }
+
+    this.form.setValue({
+      username,
+      email,
+      tel,
+    });
   }
 
   onToggle(): void {
@@ -48,6 +58,9 @@ export class ProfileComponent implements OnInit {
       return;
     }
     this.profileDetails = this.form.value as ProfileDetails;
-    this.onToggle();
+    const { username, email, tel: tel } = this.profileDetails;
+    this.userService.updateProfile(username, email, tel).subscribe(() => {
+      this.onToggle();
+    });
   }
 }
