@@ -19,8 +19,6 @@ export class CurrentThemeComponent implements OnInit {
     })
     
     this.api.getTheme(this.themeId).subscribe((theme) => {
-      console.log(theme);
-      
       this.theme = theme;
     });
   }
