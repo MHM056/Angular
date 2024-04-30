@@ -23,7 +23,7 @@ export class ApiService {
 
   createTheme(themeName: string, postText: string) {
     const payload = { themeName, postText }
-    return this.http.post<Theme>(`${this.apiUrl}/themes`, payload);
+    return this.http.post(`/api/themes`, payload);
   }
 
   getPosts(limit?: number) {
@@ -37,7 +37,7 @@ export class ApiService {
   }
 
   themeSubscribe(id: string) {
-    return this.http.put(`${this.apiUrl}/themes/${id}`, {});
+    return this.http.put(`/api/themes/${id}`, {});
   }
 
 }

@@ -42,6 +42,6 @@ export class ThemesListComponent implements OnInit {
 
   handleSubscribe(el: any): void {
     const themeId = el.attributes.key.value;
-    this.api.themeSubscribe(themeId);
+    this.api.themeSubscribe(themeId).subscribe();
   }
 }

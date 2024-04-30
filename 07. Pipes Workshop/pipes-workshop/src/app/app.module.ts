@@ -28,7 +28,6 @@ import { ErrorComponent } from './core/error/error.component';
     HttpClientModule,
     ThemeModule,
     AppRoutingModule,
-    FormsModule
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
