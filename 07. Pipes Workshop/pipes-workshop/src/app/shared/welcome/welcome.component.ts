@@ -12,9 +12,9 @@ export class WelcomeComponent {
   constructor(private route: Router) { }
 
   redirectToLogin() {
-    this.route.navigate(['/login'])
+    this.route.navigate(['/auth/login'])
   }
   redirectToRegister() {
-    this.route.navigate(['/register'])
+    this.route.navigate(['/auth/register'])
   }
 }

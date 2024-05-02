@@ -11,7 +11,6 @@ export class HomeComponent {
   constructor(private userService: UserService) {}
 
   get isLoggedIn(): boolean {
-
     return this.userService.isLogged;
   }
 }

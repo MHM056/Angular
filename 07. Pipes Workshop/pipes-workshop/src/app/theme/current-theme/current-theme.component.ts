@@ -23,11 +23,12 @@ export class CurrentThemeComponent implements OnInit {
       this.theme = theme;
     });
   }
+  
   get currentUser(): string {
     return this.userService.user?.username || '';
   }
 
-  getSubscribers(): number {
+  get subscribers(): number {
     return this.theme.subscribers?.length;
   }
 }

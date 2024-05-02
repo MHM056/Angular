@@ -9,7 +9,7 @@
                     <p>Date: <time>{{ theme.created_at }}</time></p>
                 </div>
                 <div class="subscribers">
-                    <p>Subscribers: <span>{{ getSubscribers()}}</span></p>
+                    <p>Subscribers: <span>{{ subscribers }}</span></p>
                     <!-- <button class="subscribe">Subscribe</button>
                     <button class="unsubscribe">Unsubscribe</button> -->
                 </div>
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="answer-comment">
+        <div *ngIf="currentUser !== ''" class="answer-comment">
             <p><span>{{currentUser}}'s
             </span> comment:</p>
             <div class="answer">
