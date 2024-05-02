@@ -47,7 +47,7 @@ export class ThemesListComponent implements OnInit {
       next: () => {
         this.themes.find(theme => {
           if (theme._id === themeId) {
-            theme.subscribers.length++;
+            theme.subscribers.push(String(this.userService.user?._id));
           }
         });
       }
