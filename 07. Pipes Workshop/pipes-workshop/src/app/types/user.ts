@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface UserForAuth {
-    id: string;
+    _id: string;
     username: string;
     email: string;
     tel: string;

@@ -19,7 +19,7 @@ export class ThemesListComponent implements OnInit {
   }
 
   get userId(): string {
-    return this.userService.user?.id || '';
+    return this.userService.user?._id || '';
   }
 
   ngOnInit(): void {
@@ -42,6 +42,15 @@ export class ThemesListComponent implements OnInit {
 
   handleSubscribe(el: any): void {
     const themeId = el.attributes.key.value;
-    this.api.themeSubscribe(themeId).subscribe();
+    
+    this.api.themeSubscribe(themeId).subscribe({
+      next: () => {
+        this.themes.find(theme => {
+          if (theme._id === themeId) {
+            theme.subscribers.length++;
+          }
+        });
+      }
+    });
   }
 }
