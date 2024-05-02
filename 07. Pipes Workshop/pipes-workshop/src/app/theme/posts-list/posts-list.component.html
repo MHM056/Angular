@@ -3,13 +3,11 @@
         <app-loader />
     </div>
     <div *ngIf="!isLoading" class="aside">
-        <h2 class="title">
-            Recent posts
-        </h2>
+        <h2 class="title">Recent posts</h2>
         <div>
             <div *ngFor="let post of posts" class="aside-theme">
-                <a href="#">
-                    <h3>{{ post.themeId.themeName }}</h3>
+                <a routerLink="/themes/{{post.themeId._id}}">
+                    <h3>{{ post.themeId.themeName | slice:25}}</h3>
                     <p>{{ post.userId.username }}</p>
                     <p><span>Posted: {{ post.created_at | elapsedTime }}</span></p>
                 </a>
