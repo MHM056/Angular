@@ -26,6 +26,10 @@ export class ApiService {
     return this.http.post(`/api/themes`, payload);
   }
 
+  createPost(postText: string, themeId: string) {
+    return this.http.post(`/api/themes/${themeId}`, { postText });
+  }
+
   getPosts(limit?: number) {
     let url = `${this.apiUrl}/posts`;
 

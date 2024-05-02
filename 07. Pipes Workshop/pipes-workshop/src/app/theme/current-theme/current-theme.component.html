@@ -39,9 +39,14 @@
             <p><span>{{currentUser}}'s
             </span> comment:</p>
             <div class="answer">
-                <form>
-                    <textarea name="postText" id="comment" cols="30" rows="10"></textarea>
-                    <button>Post</button>
+                <form #form="ngForm" (ngSubmit)="handlePost(form)">
+                    <textarea name="postText" id="comment" cols="30" rows="10" 
+                    ngModel 
+                    #textareaPost="ngModel" 
+                    required
+                    minlength="3"
+                    ></textarea>
+                    <button [disabled]="form.invalid" [style]="{ backgroundColor: form.invalid ? 'grey' : '#007bff' }">Post</button>
                 </form>
             </div>
         </div>

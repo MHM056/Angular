@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Theme } from 'src/app/types/theme';
@@ -18,17 +19,26 @@ export class CurrentThemeComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.themeId = params['themeId'];
     })
-    
+
     this.api.getTheme(this.themeId).subscribe((theme) => {
       this.theme = theme;
     });
   }
-  
+
   get currentUser(): string {
     return this.userService.user?.username || '';
   }
 
   get subscribers(): number {
     return this.theme.subscribers?.length;
+  }
+
+  handlePost(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
+    const { postText } = form.value;
+    this.api.createPost(postText, this.themeId).subscribe();
   }
 }
