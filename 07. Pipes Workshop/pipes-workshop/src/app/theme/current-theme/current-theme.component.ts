@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
@@ -15,6 +15,8 @@ export class CurrentThemeComponent implements OnInit {
   themeId: string = '';
   constructor(private api: ApiService, private route: ActivatedRoute, private userService: UserService) { }
 
+  @ViewChild('form') form!: NgForm;
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.themeId = params['themeId'];
@@ -22,7 +24,9 @@ export class CurrentThemeComponent implements OnInit {
 
     this.api.getTheme(this.themeId).subscribe((theme) => {
       this.theme = theme;
+      console.log(this.theme);
     });
+
   }
 
   get currentUser(): string {
@@ -39,6 +43,9 @@ export class CurrentThemeComponent implements OnInit {
     }
 
     const { postText } = form.value;
-    this.api.createPost(postText, this.themeId).subscribe();
+    this.api.createPost(postText, this.themeId).subscribe(() => {
+      this.api.getTheme(this.themeId).subscribe((theme) => this.theme = theme);
+      this.form.resetForm();
+    });
   }
 }
