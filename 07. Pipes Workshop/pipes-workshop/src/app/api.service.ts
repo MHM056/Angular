@@ -30,6 +30,10 @@ export class ApiService {
     return this.http.post(`/api/themes/${themeId}`, { postText });
   }
 
+  likePost(postId: string) {
+    return this.http.put(`/api/likes/${postId}`, {});
+  }
+
   getPosts(limit?: number) {
     let url = `${this.apiUrl}/posts`;
 

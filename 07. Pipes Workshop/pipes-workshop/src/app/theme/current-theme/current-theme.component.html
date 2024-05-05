@@ -18,35 +18,32 @@
         <!-- comment  -->
         <div class="comment" *ngFor="let post of theme.posts">
             <header class="header">
-                <p><span>{{post.userId.username}}</span> posted on <time>{{post.created_at}}</time></p>
+                <p><span>{{ post.userId.username }}</span> posted on <time>{{ post.created_at | sliceTime }}</time></p>
             </header>
             <div class="comment-main">
                 <div class="userdetails">
                     <img src="../assets/images/profile.png" alt="avatar">
                 </div>
                 <div class="post-content">
-                    <p>{{post.text}}</p>
+                    <p>{{ post.text }}</p>
                 </div>
             </div>
             <div class="footer">
-                <!-- <i class="fas fa-thumbs-up"></i>
-                <i class="fas fa-thumbs-down"></i> -->
-                <p><span>{{post.likes.length}}</span> likes</p>
+                <i *ngIf="!hasUserLiked" [attr.key]="post._id" #el (click)="handleLike(el)" class="fas fa-thumbs-up"></i>
+                <i *ngIf="hasUserLiked" [attr.key]="post._id" class="fas fa-thumbs-down"></i>
+                <p><span>{{ post.likes.length }}</span> likes</p>
             </div>
         </div>
 
         <div *ngIf="currentUser !== ''" class="answer-comment">
             <p><span>{{currentUser}}'s
-            </span> comment:</p>
+                </span> comment:</p>
             <div class="answer">
                 <form #form="ngForm" (ngSubmit)="handlePost(form)">
-                    <textarea name="postText" id="comment" cols="30" rows="10" 
-                    ngModel 
-                    #textareaPost="ngModel" 
-                    required
-                    minlength="3"
-                    ></textarea>
-                    <button [disabled]="form.invalid" [style]="{ backgroundColor: form.invalid ? 'grey' : '#007bff' }">Post</button>
+                    <textarea name="postText" id="comment" cols="30" rows="10" ngModel #textareaPost="ngModel" required
+                        minlength="3"></textarea>
+                    <button [disabled]="form.invalid"
+                        [style]="{ backgroundColor: form.invalid ? 'grey' : '#007bff' }">Post</button>
                 </form>
             </div>
         </div>

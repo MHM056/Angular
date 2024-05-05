@@ -24,7 +24,6 @@ export class CurrentThemeComponent implements OnInit {
 
     this.api.getTheme(this.themeId).subscribe((theme) => {
       this.theme = theme;
-      console.log(this.theme);
     });
 
   }
@@ -36,6 +35,13 @@ export class CurrentThemeComponent implements OnInit {
   get subscribers(): number {
     return this.theme.subscribers?.length;
   }
+  get hasUserLiked(): boolean {
+    const userLiked = this.theme.posts.find((p): any => {
+      if(p.likes.includes(this.userService.user!._id)){
+      }
+    });
+    return userLiked ? true : false;
+  }
 
   handlePost(form: NgForm) {
     if (form.invalid) {
@@ -46,6 +52,13 @@ export class CurrentThemeComponent implements OnInit {
     this.api.createPost(postText, this.themeId).subscribe(() => {
       this.api.getTheme(this.themeId).subscribe((theme) => this.theme = theme);
       this.form.resetForm();
+    });
+  }
+
+  handleLike(el: any): void {
+    const postId = el.attributes.key.value;
+    this.api.likePost(postId).subscribe(() => {
+      this.theme.posts.length++;
     });
   }
 }
