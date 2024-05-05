@@ -40,9 +40,7 @@ export class ThemesListComponent implements OnInit {
     return isSubscribedUser;
   }
 
-  handleSubscribe(el: any): void {
-    const themeId = el.attributes.key.value;
-    
+  handleSubscribe(themeId: string): void {
     this.api.themeSubscribe(themeId).subscribe({
       next: () => {
         this.themes.find(theme => {

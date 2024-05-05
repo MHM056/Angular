@@ -29,8 +29,8 @@
                 </div>
             </div>
             <div class="footer">
-                <i *ngIf="!hasUserLiked" [attr.key]="post._id" #el (click)="handleLike(el)" class="fas fa-thumbs-up"></i>
-                <i *ngIf="hasUserLiked" [attr.key]="post._id" class="fas fa-thumbs-down"></i>
+                <i *ngIf="!hasUserLiked(post._id) && currentUser !== ''" (click)="handleLike(post._id)" class="fas fa-thumbs-up"></i>
+                <i *ngIf="hasUserLiked(post._id) && currentUser !== ''" class="fas fa-thumbs-down"></i>
                 <p><span>{{ post.likes.length }}</span> likes</p>
             </div>
         </div>

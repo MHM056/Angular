@@ -32,15 +32,17 @@ export class CurrentThemeComponent implements OnInit {
     return this.userService.user?.username || '';
   }
 
+  get userId(): string {
+    return this.userService.user?._id || '';
+  }
+
   get subscribers(): number {
     return this.theme.subscribers?.length;
   }
-  get hasUserLiked(): boolean {
-    const userLiked = this.theme.posts.find((p): any => {
-      if(p.likes.includes(this.userService.user!._id)){
-      }
-    });
-    return userLiked ? true : false;
+
+  hasUserLiked(postId: string): boolean {
+    const currentPost = this.theme.posts.find(p => p._id === postId);
+    return currentPost?.likes.includes(this.userId) ? true : false;
   }
 
   handlePost(form: NgForm) {
@@ -55,10 +57,10 @@ export class CurrentThemeComponent implements OnInit {
     });
   }
 
-  handleLike(el: any): void {
-    const postId = el.attributes.key.value;
+  handleLike(postId: string): void {
     this.api.likePost(postId).subscribe(() => {
-      this.theme.posts.length++;
+      const currentPost = this.theme.posts.find(p => p._id === postId);
+      currentPost!.likes.length++;
     });
   }
 }
