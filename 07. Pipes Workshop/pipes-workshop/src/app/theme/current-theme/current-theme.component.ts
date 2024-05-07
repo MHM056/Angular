@@ -60,7 +60,7 @@ export class CurrentThemeComponent implements OnInit {
   handleLike(postId: string): void {
     this.api.likePost(postId).subscribe(() => {
       const currentPost = this.theme.posts.find(p => p._id === postId);
-      currentPost!.likes.length++;
+      currentPost!.likes.push(this.userId);
     });
   }
 }
